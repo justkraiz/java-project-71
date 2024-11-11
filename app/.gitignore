@@ -1,0 +1,53 @@
+### Ignore the Gradle cache directory
+.gradle
+
+### Ignore the build directory (for outputs and intermediate files)
+build/
+
+### Exclude the Gradle Wrapper files so they are included
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+
+### Keep specific build folders in source directories
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### IntelliJ IDEA ###
+*.idea
+*.DS_Store
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store

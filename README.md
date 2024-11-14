@@ -16,3 +16,7 @@ https://asciinema.org/a/kanw5MELIvHyMK6feoWpu9DX1
 Compare 2 yaml files + compare yaml and json file:
 https://asciinema.org/a/uzYvJasLszij4OBgTlSvy2Eqt
 
+Stylish formatter update, comparsion with nested structures:
+https://asciinema.org/a/rtTYDehMY2kedSj1imWj57Fx7
+
+

@@ -23,25 +23,15 @@ class App implements Callable<Integer> {
     @Parameters(index = "1", description = "path to second file")
     private Path filepath2;
 
-    @Option(names = {"-f", "--format"}, description = "output format [default: stylish]")
+    @Option(
+            names = {"-f", "--format"},
+            description = "output format [default: ${DEFAULT-VALUE}]",
+            defaultValue = "stylish")
     private String format;
 
     @Override
     public Integer call() throws Exception { // business logic goes here...
-        String diff =
-                filepath1 != null && filepath2 != null
-                        ? Differ.generate(filepath1, filepath2) : "Path null";
-
-        var outputFormat = format == null ? "stylish" : format;
-        switch (outputFormat) {
-            case "plain" -> System.out.println("Soon i do a plain format for diff method");
-            case "stylish" -> System.out.println(diff);
-            default -> System.out.println(
-                    "Wrong output format, "
-                    + "type \"stylish\" or \"plain\". "
-                    + "If the format is not written, "
-                    + "then the standard output format \"stylish\" will be used");
-        }
+        System.out.println(Differ.generate(filepath1, filepath2, format));
         return 0;
     }
 }

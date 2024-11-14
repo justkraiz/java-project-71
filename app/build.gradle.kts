@@ -14,10 +14,14 @@ repositories {
 dependencies {
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
     implementation ("com.fasterxml.jackson.core:jackson-core:2.18.1")
-
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation ("com.fasterxml.jackson.core:jackson-databind:2.18.1")
+    // YAML factory
+    implementation ("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.2")
 
+    // https://mvnrepository.com/artifact/org.projectlombok/lombok
+    compileOnly ("org.projectlombok:lombok:1.18.34")
+    annotationProcessor ("org.projectlombok:lombok:1.18.34")
 
     //picocli
     implementation ("info.picocli:picocli:4.7.6")
@@ -31,6 +35,7 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
+
 
 tasks.jacocoTestReport { reports { xml.required.set(true) } }
 

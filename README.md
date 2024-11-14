@@ -10,5 +10,9 @@
 ### Asciinema's:
 Here asciinema shows how the program works, launch without arguments, launch with the -h --help flag, launch with two config files for comparison file1.json file2.json
 
+Compare 2 json files:
 https://asciinema.org/a/kanw5MELIvHyMK6feoWpu9DX1
+
+Compare 2 yaml files + compare yaml and json file:
+https://asciinema.org/a/uzYvJasLszij4OBgTlSvy2Eqt
 

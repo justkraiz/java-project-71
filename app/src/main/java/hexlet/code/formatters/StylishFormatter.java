@@ -11,15 +11,23 @@ public class StylishFormatter implements Formatter {
 
     @Override
     public String format() {
+        // Получаем данные для форматирования
         var data1 = Differ.getData1();
         var data2 = Differ.getData2();
+
+        // Создаем объединенный набор всех ключей
         Set<String> allKeys = new HashSet<>(data1.keySet());
         allKeys.addAll(data2.keySet());
+
+        // Создаем структуру для хранения результата
         StringBuilder result = new StringBuilder("{\n");
 
+        // Обрабатываем каждый ключ
         allKeys.stream().sorted().forEach(key -> result.append(formatKey(data1, data2, key)));
 
         result.append("}");
+
+        // Преобразуем результат в строку
         return result.toString();
     }
 

@@ -1,9 +1,9 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/justkraiz/java-project-71/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/justkraiz/java-project-71/actions) 
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/67691ab629f7b74af407/maintainability)](https://codeclimate.com/github/justkraiz/java-project-71/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/b1044ddb99b2e464d04e/maintainability)](https://codeclimate.com/github/justkraiz/java-project-71/maintainability)
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/67691ab629f7b74af407/test_coverage)](https://codeclimate.com/github/justkraiz/java-project-71/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b1044ddb99b2e464d04e/test_coverage)](https://codeclimate.com/github/justkraiz/java-project-71/test_coverage)
 
 [![Java CI](https://github.com/justkraiz/java-project-71/actions/workflows/main.yml/badge.svg)](https://github.com/justkraiz/java-project-71/actions/workflows/main.yml)
 
@@ -21,4 +21,7 @@ https://asciinema.org/a/rtTYDehMY2kedSj1imWj57Fx7
 
 Plain formatter ready to work, сomparing two files on this asciinema:
 https://asciinema.org/a/N70nwsscvs2EpnXOMSY8nBuBe
+
+Json formatter asciinema:
+https://asciinema.org/a/z61GUfGrRiMM0ck2hv6NyFlrS
 

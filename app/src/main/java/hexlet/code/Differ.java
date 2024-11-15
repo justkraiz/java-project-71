@@ -1,6 +1,7 @@
 package hexlet.code;
 
 import hexlet.code.formatters.Formatter;
+import hexlet.code.formatters.JSONFormatter;
 import hexlet.code.formatters.PlainFormatter;
 import hexlet.code.formatters.StylishFormatter;
 import lombok.Getter;
@@ -24,6 +25,7 @@ public class Differ {
         Formatter formatter = switch (format) {
             case "stylish" -> new StylishFormatter();
             case "plain" -> new PlainFormatter();
+            case "json" -> new JSONFormatter();
             default -> throw new IllegalArgumentException("Unsupported format: " + format);
         };
         return formatter.format();

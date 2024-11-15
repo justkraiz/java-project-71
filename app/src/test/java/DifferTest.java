@@ -8,14 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class DifferTest {
-    static String file1JsonPathOld;
-    static String file2JsonPathOld;
-    static String file1JsonPathNew;
-    static String file2JsonPathNew;
-    static String file1YamlPathOld;
-    static String file2YamlPathOld;
-    static String file1YamlPathNew;
-    static String file2YamlPathNew;
+    private static String file1JsonPathOld;
+    private static String file2JsonPathOld;
+    private static String file1JsonPathNew;
+    private static String file2JsonPathNew;
+    private static String file1YamlPathOld;
+    private static String file2YamlPathOld;
+    private static String file1YamlPathNew;
+    private static String file2YamlPathNew;
+
     @BeforeAll
     public static void setUp() {
         file1JsonPathOld = "src/test/resources/file1_old.json";

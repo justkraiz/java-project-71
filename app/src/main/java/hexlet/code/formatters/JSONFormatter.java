@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class JSONFormatter implements Formatter {
+public final class JSONFormatter implements Formatter {
 
     @Override
     public String format() {

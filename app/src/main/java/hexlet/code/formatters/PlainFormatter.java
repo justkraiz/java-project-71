@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class PlainFormatter implements Formatter {
+public final class PlainFormatter implements Formatter {
 
     @Override
     public String format() {

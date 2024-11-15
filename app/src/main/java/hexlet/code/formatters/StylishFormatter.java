@@ -1,6 +1,7 @@
 package hexlet.code.formatters;
 
 import hexlet.code.Differ;
+import hexlet.code.formatters.utils.FormatterUtils;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -23,32 +24,15 @@ public class StylishFormatter implements Formatter {
     }
 
     private String formatKey(Map<String, Object> data1, Map<String, Object> data2, String key) {
-        Object value1 = data1.get(key);
-        Object value2 = data2.get(key);
-
-        if (isUnchanged(data1, data2, key)) {
-            return formatUnchangedKey(key, value1);
-        } else if (isUpdated(data1, data2, key)) {
-            return formatUpdatedKey(key, value1, value2);
-        } else if (isRemoved(data1, data2, key)) {
-            return formatRemovedKey(key, value1);
+        if (FormatterUtils.isUnchanged(data1, data2, key)) {
+            return formatUnchangedKey(key, data1.get(key));
+        } else if (FormatterUtils.isUpdated(data1, data2, key)) {
+            return formatUpdatedKey(key, data1.get(key), data2.get(key));
+        } else if (FormatterUtils.isRemoved(data1, data2, key)) {
+            return formatRemovedKey(key, data1.get(key));
         } else {
-            return formatAddedKey(key, value2);
+            return formatAddedKey(key, data2.get(key));
         }
-    }
-
-    private boolean isUnchanged(Map<String, Object> data1, Map<String, Object> data2, String key) {
-        return data1.containsKey(key) && data2.containsKey(key)
-                && data1.get(key) != null && data1.get(key).equals(data2.get(key));
-    }
-
-    private boolean isUpdated(Map<String, Object> data1, Map<String, Object> data2, String key) {
-        return data1.containsKey(key) && data2.containsKey(key)
-                && (data1.get(key) == null || !data1.get(key).equals(data2.get(key)));
-    }
-
-    private boolean isRemoved(Map<String, Object> data1, Map<String, Object> data2, String key) {
-        return data1.containsKey(key) && !data2.containsKey(key);
     }
 
     private String formatUnchangedKey(String key, Object value) {

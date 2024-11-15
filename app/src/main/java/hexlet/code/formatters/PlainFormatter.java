@@ -1,6 +1,7 @@
 package hexlet.code.formatters;
 
 import hexlet.code.Differ;
+import hexlet.code.formatters.utils.FormatterUtils;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -22,30 +23,14 @@ public class PlainFormatter implements Formatter {
     }
 
     private String formatKey(Map<String, Object> data1, Map<String, Object> data2, String key) {
-        boolean isInData1 = data1.containsKey(key);
-        boolean isInData2 = data2.containsKey(key);
-
-        if (isUpdated(data1, data2, key)) {
+        if (FormatterUtils.isUpdated(data1, data2, key)) {
             return formatUpdatedProperty(key, data1.get(key), data2.get(key));
-        } else if (isRemoved(isInData1, isInData2)) {
+        } else if (FormatterUtils.isRemoved(data1, data2, key)) {
             return formatRemovedProperty(key);
-        } else if (isAdded(isInData1, isInData2)) {
+        } else if (FormatterUtils.isAdded(data1, data2, key)) {
             return formatAddedProperty(key, data2.get(key));
         }
         return "";
-    }
-
-    private boolean isUpdated(Map<String, Object> data1, Map<String, Object> data2, String key) {
-        return data1.containsKey(key) && data2.containsKey(key)
-                && (data1.get(key) == null || !data1.get(key).equals(data2.get(key)));
-    }
-
-    private boolean isRemoved(boolean isInData1, boolean isInData2) {
-        return isInData1 && !isInData2;
-    }
-
-    private boolean isAdded(boolean isInData1, boolean isInData2) {
-        return !isInData1 && isInData2;
     }
 
     private String formatUpdatedProperty(String key, Object value1, Object value2) {

@@ -19,8 +19,7 @@ public class Differ {
     private static Map<String, Object> data2;
 
     public static String generate(String filepath1, String filepath2) throws IOException, NullPointerException {
-        Parser.parse(Path.of(filepath1), Path.of(filepath2));
-        return new StylishFormatter().format();
+        return generate(filepath1, filepath2, "stylish");
     }
 
     public static String generate(String filepath1, String filepath2, String format)

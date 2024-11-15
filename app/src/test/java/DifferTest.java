@@ -24,7 +24,7 @@ public class DifferTest {
         file2JsonPathNew = "src/test/resources/file2_new.json";
         file1YamlPathOld = "src/test/resources/file1_old.yaml";
         file2YamlPathOld = "src/test/resources/file2_old.yaml";
-        file1YamlPathNew = "src/test/resources/file1_new.yaml";
+        file1YamlPathNew = "src/test/resources/file1_new.yml";
         file2YamlPathNew = "src/test/resources/file2_new.yaml";
     }
 

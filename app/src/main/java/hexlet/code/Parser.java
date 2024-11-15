@@ -30,7 +30,7 @@ public class Parser {
                     yield mapper.readValue(Files.readString(filepath), new TypeReference<>() {
                     });
                 }
-                case "yaml" -> {
+                case "yaml","yml" -> {
                     // yaml mapper
                     mapper = new ObjectMapper(new YAMLFactory());
                     // Используем TreeMap для сортировки ключей

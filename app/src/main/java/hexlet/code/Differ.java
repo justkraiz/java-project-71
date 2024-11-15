@@ -17,10 +17,9 @@ public class Differ {
     @Getter @Setter
     private static Map<String, Object> data2;
 
-
     public static String generate(Path filepath1, Path filepath2, String format)
             throws IOException, NullPointerException {
-        // Чтение и парсинг файлов в мап
+
         Parser.parse(filepath1, filepath2);
         Formatter formatter = switch (format) {
             case "stylish" -> new StylishFormatter();

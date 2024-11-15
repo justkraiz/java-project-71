@@ -9,13 +9,16 @@ import picocli.CommandLine.Parameters;
 import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
-@Command(name = "gendiff", mixinStandardHelpOptions = true, version = "gendiff 1.0",
+@Command(name = "gendiff",
+        mixinStandardHelpOptions = true,
+        version = "gendiff 1.0",
         description = "Compares two configuration files and shows a difference.")
 class App implements Callable<Integer> {
     public static void main(String[] args) {
         int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
+
 
     @Parameters(index = "0", description = "path to first file")
     private Path filepath1;
@@ -30,7 +33,7 @@ class App implements Callable<Integer> {
     private String format;
 
     @Override
-    public Integer call() throws Exception { // business logic goes here...
+    public Integer call() throws Exception {
         System.out.println(Differ.generate(filepath1, filepath2, format));
         return 0;
     }

@@ -3,30 +3,29 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class DifferTest {
-    static Path file1JsonPathOld;
-    static Path file2JsonPathOld;
-    static Path file1JsonPathNew;
-    static Path file2JsonPathNew;
-    static Path file1YamlPathOld;
-    static Path file2YamlPathOld;
-    static Path file1YamlPathNew;
-    static Path file2YamlPathNew;
+    static String file1JsonPathOld;
+    static String file2JsonPathOld;
+    static String file1JsonPathNew;
+    static String file2JsonPathNew;
+    static String file1YamlPathOld;
+    static String file2YamlPathOld;
+    static String file1YamlPathNew;
+    static String file2YamlPathNew;
     @BeforeAll
     public static void setUp() {
-        file1JsonPathOld = Path.of("src/test/resources/file1_old.json");
-        file2JsonPathOld = Path.of("src/test/resources/file2_old.json");
-        file1JsonPathNew = Path.of("src/test/resources/file1_new.json");
-        file2JsonPathNew = Path.of("src/test/resources/file2_new.json");
-        file1YamlPathOld = Path.of("src/test/resources/file1_old.yaml");
-        file2YamlPathOld = Path.of("src/test/resources/file2_old.yaml");
-        file1YamlPathNew = Path.of("src/test/resources/file1_new.yaml");
-        file2YamlPathNew = Path.of("src/test/resources/file2_new.yaml");
+        file1JsonPathOld = "src/test/resources/file1_old.json";
+        file2JsonPathOld = "src/test/resources/file2_old.json";
+        file1JsonPathNew = "src/test/resources/file1_new.json";
+        file2JsonPathNew = "src/test/resources/file2_new.json";
+        file1YamlPathOld = "src/test/resources/file1_old.yaml";
+        file2YamlPathOld = "src/test/resources/file2_old.yaml";
+        file1YamlPathNew = "src/test/resources/file1_new.yaml";
+        file2YamlPathNew = "src/test/resources/file2_new.yaml";
     }
 
     @Test
@@ -196,8 +195,9 @@ public class DifferTest {
         // IllegalArgumentException при передаче несуществующего пути
         assertThrows(IOException.class, () ->
                 Differ.generate(
-                        Path.of("asd/asd.null"),
-                        Path.of("asd/empty.null"), "stylish"));
+                        "asd/asd.null",
+                        "asd/empty.null",
+                        "stylish"));
     }
 
     @Test

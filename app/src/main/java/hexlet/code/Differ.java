@@ -18,10 +18,15 @@ public class Differ {
     @Getter @Setter
     private static Map<String, Object> data2;
 
-    public static String generate(Path filepath1, Path filepath2, String format)
+    public static String generate(String filepath1, String filepath2) throws IOException, NullPointerException {
+        Parser.parse(Path.of(filepath1), Path.of(filepath2));
+        return new StylishFormatter().format();
+    }
+
+    public static String generate(String filepath1, String filepath2, String format)
             throws IOException, NullPointerException {
 
-        Parser.parse(filepath1, filepath2);
+        Parser.parse(Path.of(filepath1), Path.of(filepath2));
         Formatter formatter = switch (format) {
             case "stylish" -> new StylishFormatter();
             case "plain" -> new PlainFormatter();

@@ -6,7 +6,6 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
 
 
-import java.nio.file.Path;
 import java.util.concurrent.Callable;
 
 @Command(name = "gendiff",
@@ -21,10 +20,10 @@ class App implements Callable<Integer> {
 
 
     @Parameters(index = "0", description = "path to first file")
-    private Path filepath1;
+    private String filepath1;
 
     @Parameters(index = "1", description = "path to second file")
-    private Path filepath2;
+    private String filepath2;
 
     @Option(
             names = {"-f", "--format"},

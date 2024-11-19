@@ -1,6 +1,7 @@
 import hexlet.code.Differ;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utils.Reader;
 
 import java.io.IOException;
 import java.util.Map;
@@ -19,9 +20,12 @@ public class DifferTest {
     private static String file2Yaml;
     private static String file3Yml;
     private static String emptyFile;
+    private static String expectedStylishFixture;
+    private static String expectedJsonFixture;
+    private static String expectedPlainFixture;
 
     @BeforeAll
-    public static void setUp() {
+    public static void setUp() throws IOException {
         file1Json = "src/test/resources/file1_new.json";
         file2Json = "src/test/resources/file2_new.json";
         file3Json = "src/test/resources/file3_new.json";
@@ -30,6 +34,9 @@ public class DifferTest {
         file3Yml = "src/test/resources/file3_new.yml";
         emptyFile = "src/test/resources/empty.json";
 
+        expectedStylishFixture = Reader.readFile("src/test/resources/expected_stylish_format.txt");
+        expectedJsonFixture = Reader.readFile("src/test/resources/expected_Json_format.txt");
+        expectedPlainFixture = Reader.readFile("src/test/resources/expected_plain_format.txt");
     }
 
     // Объединенный тест, что методы не возвращают null
@@ -46,194 +53,36 @@ public class DifferTest {
     }
 
     @Test
+    void testDifferWithTwoArgsOnly() throws IOException {
+        assertNotNull(Differ.generate(file1Json, file2Json));
+        assertNotNull(Differ.generate(file1Yaml, file2Yaml));
+        assertEquals(expectedStylishFixture, Differ.generate(file1Yaml, file2Yaml));
+        assertEquals(expectedStylishFixture, Differ.generate(file1Json, file2Json));
+    }
+
+    @Test
     void testDifferWithTwoArgsDefaultFormat() throws IOException {
-        String expected = """
-                {
-                    chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  + chars2: false
-                  - checked: false
-                  + checked: true
-                  - default: null
-                  + default: [value1, value2]
-                  - id: 45
-                  + id: null
-                  - key1: value1
-                  + key2: value2
-                    numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  + numbers2: [22, 33, 44, 55]
-                  - numbers3: [3, 4, 5]
-                  + numbers4: [4, 5, 6]
-                  + obj1: {nestedKey=value, isNested=true}
-                  - setting1: Some value
-                  + setting1: Another value
-                  - setting2: 200
-                  + setting2: 300
-                  - setting3: true
-                  + setting3: none
-                }""";
-        assertEquals(expected, Differ.generate(file1Json, file2Json));
+        assertEquals(expectedStylishFixture, Differ.generate(file1Json, file2Json));
     }
 
     @Test
     void testDifferJsonFormat() throws IOException {
-        String expected = """
-                {
-                  "chars1" : {
-                    "value" : [ "a", "b", "c" ],
-                    "status" : "unchanged"
-                  },
-                  "chars2" : {
-                    "newValue" : false,
-                    "oldValue" : [ "d", "e", "f" ],
-                    "status" : "updated"
-                  },
-                  "checked" : {
-                    "newValue" : true,
-                    "oldValue" : false,
-                    "status" : "updated"
-                  },
-                  "default" : {
-                    "newValue" : [ "value1", "value2" ],
-                    "oldValue" : null,
-                    "status" : "updated"
-                  },
-                  "id" : {
-                    "newValue" : null,
-                    "oldValue" : 45,
-                    "status" : "updated"
-                  },
-                  "key1" : {
-                    "value" : "value1",
-                    "status" : "removed"
-                  },
-                  "key2" : {
-                    "value" : "value2",
-                    "status" : "added"
-                  },
-                  "numbers1" : {
-                    "value" : [ 1, 2, 3, 4 ],
-                    "status" : "unchanged"
-                  },
-                  "numbers2" : {
-                    "newValue" : [ 22, 33, 44, 55 ],
-                    "oldValue" : [ 2, 3, 4, 5 ],
-                    "status" : "updated"
-                  },
-                  "numbers3" : {
-                    "value" : [ 3, 4, 5 ],
-                    "status" : "removed"
-                  },
-                  "numbers4" : {
-                    "value" : [ 4, 5, 6 ],
-                    "status" : "added"
-                  },
-                  "obj1" : {
-                    "value" : {
-                      "nestedKey" : "value",
-                      "isNested" : true
-                    },
-                    "status" : "added"
-                  },
-                  "setting1" : {
-                    "newValue" : "Another value",
-                    "oldValue" : "Some value",
-                    "status" : "updated"
-                  },
-                  "setting2" : {
-                    "newValue" : 300,
-                    "oldValue" : 200,
-                    "status" : "updated"
-                  },
-                  "setting3" : {
-                    "newValue" : "none",
-                    "oldValue" : true,
-                    "status" : "updated"
-                  }
-                }""";
-        assertEquals(expected, Differ.generate(file1Json, file2Json, "json"));
+        assertEquals(expectedJsonFixture, Differ.generate(file1Json, file2Json, "json"));
     }
 
     @Test
     void testDifferPlainFormatJsonConfigs() throws IOException {
-        String expected = """
-                Property 'chars2' was updated. From [complex value] to false
-                Property 'checked' was updated. From false to true
-                Property 'default' was updated. From null to [complex value]
-                Property 'id' was updated. From 45 to null
-                Property 'key1' was removed
-                Property 'key2' was added with value: 'value2'
-                Property 'numbers2' was updated. From [complex value] to [complex value]
-                Property 'numbers3' was removed
-                Property 'numbers4' was added with value: [complex value]
-                Property 'obj1' was added with value: [complex value]
-                Property 'setting1' was updated. From 'Some value' to 'Another value'
-                Property 'setting2' was updated. From 200 to 300
-                Property 'setting3' was updated. From true to 'none'""";
-        assertEquals(expected, Differ.generate(file1Json, file2Json, "plain"));
+        assertEquals(expectedPlainFixture, Differ.generate(file1Json, file2Json, "plain"));
     }
 
     @Test
     void testDifferStylishFormatJsonConfigs() throws IOException {
-        String expected = """
-                {
-                    chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  + chars2: false
-                  - checked: false
-                  + checked: true
-                  - default: null
-                  + default: [value1, value2]
-                  - id: 45
-                  + id: null
-                  - key1: value1
-                  + key2: value2
-                    numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  + numbers2: [22, 33, 44, 55]
-                  - numbers3: [3, 4, 5]
-                  + numbers4: [4, 5, 6]
-                  + obj1: {nestedKey=value, isNested=true}
-                  - setting1: Some value
-                  + setting1: Another value
-                  - setting2: 200
-                  + setting2: 300
-                  - setting3: true
-                  + setting3: none
-                }""";
-        assertEquals((expected), Differ.generate(file1Json, file2Json, "stylish"));
+        assertEquals(expectedStylishFixture, Differ.generate(file1Json, file2Json, "stylish"));
     }
 
     @Test
     void testDifferStylishFormatYamlConfigs() throws IOException {
-        String expected = """
-                {
-                    chars1: [a, b, c]
-                  - chars2: [d, e, f]
-                  + chars2: false
-                  - checked: false
-                  + checked: true
-                  - default: null
-                  + default: [value1, value2]
-                  - id: 45
-                  + id: null
-                  - key1: value1
-                  + key2: value2
-                    numbers1: [1, 2, 3, 4]
-                  - numbers2: [2, 3, 4, 5]
-                  + numbers2: [22, 33, 44, 55]
-                  - numbers3: [3, 4, 5]
-                  + numbers4: [4, 5, 6]
-                  + obj1: {nestedKey=value, isNested=true}
-                  - setting1: Some value
-                  + setting1: Another value
-                  - setting2: 200
-                  + setting2: 300
-                  - setting3: true
-                  + setting3: none
-                }""";
-        assertEquals(expected, Differ.generate(file1Yaml, file2Yaml, "stylish"));
+        assertEquals(expectedStylishFixture, Differ.generate(file1Yaml, file2Yaml, "stylish"));
     }
 
     @Test

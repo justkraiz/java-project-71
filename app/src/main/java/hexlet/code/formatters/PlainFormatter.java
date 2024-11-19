@@ -1,43 +1,35 @@
 package hexlet.code.formatters;
 
-import hexlet.code.Differ;
 import hexlet.code.formatters.utils.FormatterUtils;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+
 
 public final class PlainFormatter implements Formatter {
 
     @Override
     public String format() {
-        // Получаем данные для форматирования
-        var data1 = Differ.getData1();
-        var data2 = Differ.getData2();
+        // Получаем различия с использованием утилитного метода
+        Map<String, Map<String, Object>> differences = FormatterUtils.getDifferences();
 
-        // Создаем объединенный набор всех ключей
-        Set<String> allKeys = new HashSet<>(data1.keySet());
-        allKeys.addAll(data2.keySet());
-
-        // Создаем структуру для хранения результата
+        // Создаем строку для хранения результата
         StringBuilder result = new StringBuilder();
 
-        // Обрабатываем каждый ключ
-        allKeys.stream().sorted().forEach(key -> result.append(formatKey(data1, data2, key)));
+        // Форматируем результат
+        differences.forEach((key, entry) -> result.append(formatKey(entry, key)));
 
         // Преобразуем результат в строку
         return result.toString().trim();
     }
 
-    private String formatKey(Map<String, Object> data1, Map<String, Object> data2, String key) {
-        if (FormatterUtils.isUpdated(data1, data2, key)) {
-            return formatUpdatedProperty(key, data1.get(key), data2.get(key));
-        } else if (FormatterUtils.isRemoved(data1, data2, key)) {
-            return formatRemovedProperty(key);
-        } else if (FormatterUtils.isAdded(data1, data2, key)) {
-            return formatAddedProperty(key, data2.get(key));
-        }
-        return "";
+    private String formatKey(Map<String, Object> entry, String key) {
+        String status = (String) entry.get("status");
+        return switch (status) {
+            case "updated" -> formatUpdatedProperty(key, entry.get("oldValue"), entry.get("newValue"));
+            case "removed" -> formatRemovedProperty(key);
+            case "added" -> formatAddedProperty(key, entry.get("value"));
+            default -> "";
+        };
     }
 
     private String formatUpdatedProperty(String key, Object value1, Object value2) {

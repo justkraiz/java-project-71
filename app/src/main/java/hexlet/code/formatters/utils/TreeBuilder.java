@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class FormatterUtils {
+public class TreeBuilder {
     public static Map<String, Map<String, Object>> getDifferences() {
         var data1 = Differ.getData1();
         var data2 = Differ.getData2();
@@ -40,16 +40,16 @@ public class FormatterUtils {
         return differences;
     }
 
-    public static boolean isUpdated(Map<String, Object> data1, Map<String, Object> data2, String key) {
+    private static boolean isUpdated(Map<String, Object> data1, Map<String, Object> data2, String key) {
         return data1.containsKey(key) && data2.containsKey(key)
                 && (data1.get(key) == null || !data1.get(key).equals(data2.get(key)));
     }
 
-    public static boolean isRemoved(Map<String, Object> data1, Map<String, Object> data2, String key) {
+    private static boolean isRemoved(Map<String, Object> data1, Map<String, Object> data2, String key) {
         return data1.containsKey(key) && !data2.containsKey(key);
     }
 
-    public static boolean isAdded(Map<String, Object> data1, Map<String, Object> data2, String key) {
+    private static boolean isAdded(Map<String, Object> data1, Map<String, Object> data2, String key) {
         return !data1.containsKey(key) && data2.containsKey(key);
     }
 }

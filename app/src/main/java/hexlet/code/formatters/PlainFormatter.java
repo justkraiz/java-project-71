@@ -1,6 +1,6 @@
 package hexlet.code.formatters;
 
-import hexlet.code.formatters.utils.FormatterUtils;
+import hexlet.code.formatters.utils.TreeBuilder;
 
 import java.util.Map;
 
@@ -10,7 +10,7 @@ public final class PlainFormatter implements Formatter {
     @Override
     public String format() {
         // Получаем различия с использованием утилитного метода
-        Map<String, Map<String, Object>> differences = FormatterUtils.getDifferences();
+        Map<String, Map<String, Object>> differences = TreeBuilder.getDifferences();
 
         // Создаем строку для хранения результата
         StringBuilder result = new StringBuilder();

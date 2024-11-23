@@ -2,14 +2,14 @@ package hexlet.code.formatters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hexlet.code.formatters.utils.FormatterUtils;
+import hexlet.code.formatters.utils.TreeBuilder;
 
 import java.util.Map;
 
 public final class JSONFormatter implements Formatter {
     @Override
     public String format() {
-        return convertToJson(FormatterUtils.getDifferences());
+        return convertToJson(TreeBuilder.getDifferences());
     }
 
 
